@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <form action="~/Home/SaveUploadedFile" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm" style="width: 50px; background: none; border: none;">
+        <div class="fallback">
+            <input name="file" type="file" multiple />
+            <input type="submit" value="Upload" />
+        </div>
+    </form>
+</div>
+@section scripts{
+
+    <script type="text/javascript">
+
+        //File Upload response from the server
+        Dropzone.options.dropzoneForm = {
+            init: function () {
+                this.on("complete", function (data) {
+                    var res = eval('(' + data.xhr.responseText + ')');
+                });
+            }
+        };
+
+    </script>
+}
