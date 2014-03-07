@@ -28,7 +28,7 @@ namespace DropZoneFileUpload
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/dropzonescripts").Include(
-                     "~/Scripts/dropzone/dropzone.js"));
+                     "~/Scripts/dropzone/dropzone.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/dropzonescss").Include(
                      "~/Scripts/dropzone/css/basic.css",

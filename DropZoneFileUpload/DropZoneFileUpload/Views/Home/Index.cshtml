@@ -3,25 +3,41 @@
 }
 
 <div class="jumbotron">
-    <form action="~/Home/SaveUploadedFile" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm" style="width: 50px; background: none; border: none;">
+    <form action="~/Home/SaveUploadedFile" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm">
         <div class="fallback">
             <input name="file" type="file" multiple />
             <input type="submit" value="Upload" />
         </div>
     </form>
 </div>
+
+<style type="text/css">
+    .dz-max-files-reached {
+        background-color: red;
+    }
+
+  
+
+</style>
 @section scripts{
 
     <script type="text/javascript">
 
         //File Upload response from the server
         Dropzone.options.dropzoneForm = {
+            maxFiles: 2,
             init: function () {
-                this.on("complete", function (data) {
+                this.on("maxfilesexceeded", function (data) {
                     var res = eval('(' + data.xhr.responseText + ')');
+
                 });
             }
         };
+
+
+   
+
+   
 
     </script>
 }
