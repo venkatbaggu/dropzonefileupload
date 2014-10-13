@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DropZoneFileUpload.Models;
 
 namespace DropZoneFileUpload.Controllers
 {
@@ -12,6 +13,12 @@ namespace DropZoneFileUpload.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        protected override void HandleUnknownAction(string actionName)
+        {
+            this.View(actionName).ExecuteResult(this.ControllerContext);
+            //base.HandleUnknownAction(actionName);
         }
 
         public ActionResult About()
@@ -69,5 +76,22 @@ namespace DropZoneFileUpload.Controllers
             }
         }
 
+
+        public ActionResult DisplayImages()
+        {
+            return View();
+        }
+
+        public ActionResult GetAttachments()
+        {
+            //Get the images list from repository
+            var attachmentsList =  new List<AttachmentsModel>
+            {
+                new AttachmentsModel {AttachmentID = 1, FileName = "/images/wallimages/dropzonelayout.png", Path = "/images/wallimages/dropzonelayout.png"},
+                new AttachmentsModel {AttachmentID = 1, FileName = "/images/wallimages/imageslider-3.png", Path = "/images/wallimages/imageslider-3.png"}
+            }.ToList();
+
+            return Json(new { Data = attachmentsList }, JsonRequestBehavior.AllowGet); 
+        }
     }
 }
